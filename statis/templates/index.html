@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RenPy File Extractor</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎮 RenPy Extractor</h1>
+            <p>Extract .rpa files dan decompile .rpyc files dengan mudah</p>
+        </div>
+
+        <!-- Main Card -->
+        <div class="main-card">
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            <div class="alert alert-info">
+                                <span class="alert-icon">ℹ️</span>
+                                <span class="alert-text">{{ message }}</span>
+                                <button class="alert-close" onclick="this.parentElement.remove()">&times;</button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <!-- Upload Form -->
+            <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">Drag & Drop file di sini</div>
+                    <div class="upload-subtitle">atau klik untuk memilih file</div>
+                    <input type="file" id="fileInput" name="file" class="file-input" accept=".rpa,.rpyc">
+                    <label for="fileInput" class="file-label">
+                        <span class="file-icon">📂</span>
+                        Pilih File
+                    </label>
+                    <div class="file-info" id="fileInfo"></div>
+                </div>
+
+                <div class="file-types">
+                    <h3>📋 Tipe File yang Didukung:</h3>
+                    <div class="type-grid">
+                        <div class="type-item">
+                            <div class="type-icon">📦</div>
+                            <div class="type-title">.RPA Files</div>
+                            <div class="type-desc">Resource Package Archive - berisi gambar, audio, script</div>
+                        </div>
+                        <div class="type-item">
+                            <div class="type-icon">🔄</div>
+                            <div class="type-title">.RPYC Files</div>
+                            <div class="type-desc">Compiled Python - akan di-decompile ke .rpy</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span class="btn-icon">🚀</span>
+                    <span class="btn-text">Proses File</span>
+                    <div class="btn-loading" id="loading">
+                        <div class="spinner"></div>
+                        <span>Processing...</span>
+                    </div>
+                </button>
+            </form>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <a href="/downloads" class="action-btn">
+                    <span class="action-icon">📥</span>
+                    <span>Download Hasil</span>
+                </a>
+                <button onclick="clearAll()" class="action-btn action-danger">
+                    <span class="action-icon">🗑️</span>
+                    <span>Clear All</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Made with ❤️ for RenPy Developers</p>
+        </div>
+    </div>
+
+    <script src="static/js/script.js"></script>
+</body>
+</html>
